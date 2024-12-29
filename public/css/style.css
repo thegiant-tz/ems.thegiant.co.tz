@@ -1,0 +1,5 @@
+@import url('color.css');
+
+nav .pagination .active {
+    background: var(--primary);
+}

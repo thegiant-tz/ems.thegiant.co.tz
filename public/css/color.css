@@ -1,0 +1,9 @@
+:root {
+    --primary: #051A68;
+    --primaryAlt: #006FFF;
+    --green: #4DDB4E;
+}
+
+.bgPrimary {
+    background-color: var(--primary);
+}
