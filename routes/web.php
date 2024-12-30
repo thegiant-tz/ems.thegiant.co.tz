@@ -29,6 +29,7 @@ use App\Http\Controllers\RetirementController;
 
 Route::get('/', [LoginController::class, 'index'])->name('welcome')->middleware('guest');
 Route::post('login', [LoginController::class, 'authenticate'])->name('login');
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::group(['prefix' => 'account', 'as' => 'account.', 'middleware' => ['auth']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

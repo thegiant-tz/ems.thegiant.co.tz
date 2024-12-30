@@ -36,8 +36,7 @@
                   @can('view dashboard menu')
                       <li class="nav-item">
                           <a href="#" class="nav-link"><span class="pcoded-micon"><i
-                                      class="mdi mdi-gauge-full"></i></span><span
-                                  class="pcoded-mtext">Dashboard</span></a>
+                                      class="mdi mdi-gauge-full"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                       </li>
                   @endcan
 
@@ -47,17 +46,28 @@
                                       class="fa fa-dashboard"></i></span><span class="pcoded-mtext">Expenses</span></a>
                           <ul class="pcoded-submenu">
                               @can('initiate request')
-                                  <li class=""><a href="{{ route('account.request.initiate') }}" class="">Initiate request</a></li>
+                                  <li class=""><a href="{{ route('account.request.initiate') }}" class="">Initiate
+                                          request</a></li>
                               @endcan
                               @can('view expense list')
-                                  <li class=""><a href="{{ route('account.request.list') }}" class="">My requests</a></li>
+                                  <li class=""><a href="{{ route('account.request.list') }}" class="">My
+                                          requests</a></li>
                               @endcan
                               @can('view retirements')
-                                  <li class=""><a href="{{ route('account.request.retirements.index') }}" class="">Retirements</a></li>
+                                  <li class=""><a href="{{ route('account.request.retirements.index') }}"
+                                          class="">Retirements</a></li>
                               @endcan
                           </ul>
                       </li>
                   @endcan
+
+                  <li class="nav-item">
+                      <form class="nav-link" method="post" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-danger form-control btn-sm"><span class="pcoded-micon"><i class="mdi mdi-gauge-full"></i></span><span
+                            class="pcoded-mtext">Logout</span></button>
+                      </form>
+                  </li>
 
               </ul>
 

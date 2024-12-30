@@ -2,19 +2,19 @@
 <header class="navbar pcoded-header navbar-expand-lg navbar-light headerpos-fixed">
 
     <div class="m-header">
-        <a class="mobile-menu" id="mobile-collapse1" href="index.html#!"><span></span></a>
-        <a href="index.html" class="b-brand">
+        <a class="mobile-menu" id="mobile-collapse1" href="#"><span></span></a>
+        <a href="#" class="b-brand">
 
             <img src="assets/images/logo.svg" alt="" class="logo images">
             <img src="assets/images/logo-icon.svg" alt="" class="logo-thumb images">
         </a>
     </div>
-    <a class="mobile-menu" id="mobile-header" href="index.html#!">
+    <a class="mobile-menu" id="mobile-header" href="#">
         <i class="feather icon-more-horizontal"></i>
     </a>
     <div class="collapse navbar-collapse">
-        <a href="index.html#!" class="mob-toggler"></a>
-        
+        <a href="#" class="mob-toggler"></a>
+
         <ul class="navbar-nav ms-auto">
             {{-- <li>
                 <div class="dropdown">
@@ -116,16 +116,14 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-notification">
                         <div class="pro-head">
-                            <img src="{{ asset('images/bm1.png') }}" class="img-radius"
-                                alt="User-Profile-Image">
+                            <img src="{{ asset('images/bm1.png') }}" class="img-radius" alt="User-Profile-Image">
                             <span>
                                 <span class="text-muted">{{ authUser()->name }}</span>
                                 <span class="h6">{{ authUser()->email }}</span>
                             </span>
                         </div>
                         <ul class="pro-body">
-                            <li><a href="#" class="dropdown-item"><i
-                                        class="feather icon-settings"></i>
+                            <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i>
                                     Settings</a></li>
                             <li><a href="#" class="dropdown-item"><i class="feather icon-user"></i>
                                     Profile</a>
@@ -134,8 +132,13 @@
                                     My Messages</a></li> --}}
                             {{-- <li><a href="auth-signin.html" class="dropdown-item"><i
                                         class="feather icon-lock"></i> Lock Screen</a></li> --}}
-                            <li><a href="#" class="dropdown-item"><i
-                                        class="feather icon-power text-danger"></i> Logout</a></li>
+                            <li>
+                                <form class="nav-link" method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button class="btn"><span class="pcoded-micon"><i class="mdi mdi-gauge-full"></i></span> <span
+                                            class="pcoded-mtext">Logout</span></button>
+                                    </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

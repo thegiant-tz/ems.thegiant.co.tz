@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\LoginAPIService;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
+
     function index()
     {
         // dd(Auth::user());
@@ -40,11 +42,8 @@ class LoginController extends Controller
 
     function logout(Request $request)
     {
-        $response = LoginAPIService::logout($request);
-        if ($response->status == 'success') {
-            Session::flush();
-        }
-        return $response;
+        Auth::logout();
+        return $request->wantsJson() ? new JsonResponse([], 204) : redirect('/');
     }
 
     public function authenticate(Request $request): RedirectResponse
@@ -69,5 +68,16 @@ class LoginController extends Controller
         return back()->withErrors([
             'status' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    function onLogoutAction($request, $guard)
+    {
+        $guard->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    }
+
+    function guard() {
+        return Auth::guard();
     }
 }
