@@ -13,29 +13,29 @@
                 <div class="latest-scroll" style="height:370px;position:relative; overflow:auto;">
                     <div class="card-body">
                         <div class="row items-push pt-3">
-                            <div class="col-md-4">
+                            <div class="col-6 col-md-4">
                                 <h6>Request ID:</h6>
                                 <div>{{ $requestDetail->codeId }}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-6 col-md-4">
                                 <h6>Date:</h6>
                                 <div>{{ $requestDetail->created_at->format('d/m/Y H:i') }}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-6 col-md-4">
                                 <h6>amount:</h6>
                                 <div>{{ number_format($requestDetail->amount) }}</div>
                             </div>
                         </div>
                         <div class="row items-push pt-3">
-                            <div class="col-4">
+                            <div class="col-6 col-md-4">
                                 <h6>Reason:</h6>
                                 <div>{{ $requestDetail->reason->type }}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-6 col-md-4">
                                 <h6>Department:</h6>
                                 <div>{{ $requestDetail->department->name }}</div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-6 col-md-4">
                                 <h6>Payment Type:</h6>
                                 <div>{{ strtoupper($requestDetail->payment_type) }}</div>
                             </div>
