@@ -10,6 +10,7 @@
                 <div class="card-header">
                     <h5>Information</h5>
                 </div>
+
                 <div class="latest-scroll" style="height:370px;position:relative; overflow:auto;">
                     <div class="card-body">
                         <div class="row items-push pt-3">
@@ -57,24 +58,33 @@
                         </div>
 
                         @can('reject and approve request')
-                            <form method="post" action="{{ route('account.request.action') }}" class="row items-push pt-3">
-                                @csrf
-                                <div class="col-12 p-3">
-                                    <h6>Remarks:</h6>
-                                    <textarea name="remarks" class="form-control" rows="4" required placeholder="Enter remarks"></textarea>
-                                    <input type="hidden" name="codeId" value="{{ $requestDetail->codeId }}">
-                                </div>
-                                @if (!$requestDetail->is_rejected)
-                                    <div class="col-6 col-md-4">
-                                        <button name="reject" class="btn btn-danger form-control">Reject</button>
+                            @if (!$requestDetail->isMyUpperRoleResponseExists)
+                                <form method="post" action="{{ route('account.request.action') }}" class="row items-push pt-3">
+                                    @csrf
+                                    <div class="col-12 p-3">
+                                        <h6>Remarks:</h6>
+                                        <textarea name="remarks" class="form-control" rows="4" required placeholder="Enter remarks"></textarea>
+                                        <input type="hidden" name="codeId" value="{{ $requestDetail->codeId }}">
                                     </div>
-                                @endif
-                                @if (!$requestDetail->is_approved)
-                                <div class="col-6 col-md-4">
-                                    <button name="approve" class="btn btn-primary form-control">Approve</button>
-                                </div>
-                                @endif
-                            </form>
+                                    @if (!$requestDetail->is_my_rejection_exists)
+                                        <div class="col-6 col-md-4">
+                                            <button name="reject" class="btn btn-danger form-control">Reject</button>
+                                        </div>
+                                    @endif
+                                    @if (!$requestDetail->is_my_approval_exists)
+                                        <div class="col-6 col-md-4">
+                                            <button name="approve" class="btn btn-primary form-control">Approve</button>
+                                        </div>
+                                    @endif
+                                </form>
+                            @else
+                            <div class="alert alert-success mt-3" role="alert">
+                                <h4 class="alert-heading">Alert!</h4>
+                                <p>Request has been <b>{{ $requestDetail->upperRoleRequestTracker->status }}</b> by the {{ currentUpperRoleName() }}. so no changes can be made regarding it at this time.</p>
+                                <hr>
+                                <p class="mb-0">However, you may reach out to the {{ currentUpperRoleName() }} to discuss the request changes.</p>
+                            </div>
+                            @endif
                         @endcan
                     </div>
                 </div>

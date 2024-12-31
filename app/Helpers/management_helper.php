@@ -52,4 +52,18 @@ if (!function_exists('currentLowerRole')) {
     }
 }
 
+if (!function_exists('currentUpperRoleName')) {
+    function currentUpperRoleName()
+    {
+        return currentUpperRole()->name ?? null;
+    }
+}
+
+if (!function_exists('currentUpperRole')) {
+    function currentUpperRole()
+    {
+        return currentManagement()->upperRole;
+    }
+}
+
 

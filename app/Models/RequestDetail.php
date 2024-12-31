@@ -38,6 +38,18 @@ class RequestDetail extends Model
         return $this->requestTrackers()->latest()->first()->status ?? '';
     }
 
+    function getUpperRoleRequestTrackerAttribute() {
+        return $this->requestTrackers()->whereHas('user.role', fn ($role) => $role->whereName(currentUpperRoleName()))->latest()->first();
+    }
+
+    function getIsMyUpperRoleResponseExistsAttribute() {
+        return !is_null($this->requestTrackers()->whereHas('user.role', fn ($role) => $role->whereName(currentUpperRoleName()))->first());
+    }
+
+    function getIsMyResponseExistsAttribute() {
+        return !is_null($this->requestTrackers()->whereUserId(authUserId())->latest()->first());
+    }
+
     function getIsMyRejectionExistsAttribute() {
         return !is_null($this->requestTrackers()->whereStatus('Rejected')->whereUserId(authUserId())->latest()->first());
     }

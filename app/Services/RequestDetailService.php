@@ -17,7 +17,6 @@ class RequestDetailService
 
     static function getUserRequests(Request $request, User $user = null, $isPaginate = true, $perPage = 15)
     {
-        $user = $user ?? authUser();
         $query = RequestDetail::when(isset($request->status), fn($query) => $query->whereStatus($request->status))
         ->when(isInitiator(), fn($query) => $query->whereUserId(authUserId()))
         ->when(!isInitiator(), fn($query) => $query->whereHas('requestTrackers.user.role', fn ($role) => $role->whereName(currentLowerRoleName())))
