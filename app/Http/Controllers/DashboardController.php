@@ -11,4 +11,8 @@ class DashboardController extends Controller
     public function index() {
         return view('backend.pages.dashboard');
     }
+
+    public function calendarIndex() {
+        return view('backend.pages.v1.calendar');
+    }
 }

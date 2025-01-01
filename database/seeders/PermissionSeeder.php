@@ -15,11 +15,14 @@ class PermissionSeeder extends Seeder
     {
         $permissions = [
             'view dashboard menu', 
-            'view expense menus', 
-            'initiate request', 
-            'view expense list', 
-            'view retirements', 
+            'view expense menu', 
+            'view initiate request submenu', 
+            'view expense submenu', 
+            'view retirements submenu', 
             'reject and approve request',
+            'view report menu',
+            'view calendar menu',
+            'fill retirements form',
         ];
 
         foreach ($permissions as $key => $permission) {

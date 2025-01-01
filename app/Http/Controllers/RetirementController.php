@@ -14,10 +14,15 @@ class RetirementController extends Controller
     {
         $data['pageTitle'] = 'Retirements';
         $data['requestDetails'] = RequestDetailService::getUserRequestsForRetirement($request);
+        $data['retirements'] = Retirement::orderBy('id', 'DESC')->paginate();
         return view('backend.pages.v1.retirements', $data);
     }
 
     function store(Request $request) {
+        $request->validate([
+            'attachments' => 'array', // Ensure the input is an array
+            'attachments.*' => 'file|mimes:jpg,png,gif|max:2048', // Validate each file in the array
+        ]);
         $retirement = Retirement::updateOrCreate([
             'request_detail_id' => $request->request_detail_id,
             'user_id' => Auth::user()->id,

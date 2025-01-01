@@ -45,7 +45,8 @@
 
                             <div class="col-md-6">
                                 <h6>Overall Status:</h6>
-                                <div><label class="badge badge-light-danger">{{ $requestDetail->latestStatus }}</label>
+                                <div><label
+                                        class="badge badge-light-{{ requestStatusColor($requestDetail->latestStatus) }}">{{ $requestDetail->latestStatus }}</label>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +60,8 @@
 
                         @can('reject and approve request')
                             @if (!$requestDetail->isMyUpperRoleResponseExists)
-                                <form method="post" action="{{ route('account.request.action') }}" class="row items-push pt-3">
+                                <form method="post" action="{{ route('account.request.action') }}"
+                                    class="row items-push pt-3">
                                     @csrf
                                     <div class="col-12 p-3">
                                         <h6>Remarks:</h6>
@@ -78,12 +80,16 @@
                                     @endif
                                 </form>
                             @else
-                            <div class="alert alert-success mt-3" role="alert">
-                                <h4 class="alert-heading">Alert!</h4>
-                                <p>Request has been <b>{{ $requestDetail->upperRoleRequestTracker->status }}</b> by the {{ currentUpperRoleName() }}. so no changes can be made regarding it at this time.</p>
-                                <hr>
-                                <p class="mb-0">However, you may reach out to the {{ currentUpperRoleName() }} to discuss the request changes.</p>
-                            </div>
+                                <div class="alert alert-success mt-3" role="alert">
+                                    <h4 class="alert-heading">Alert!</h4>
+                                    <p>Request has been <b
+                                            class="badge badge-light-{{ requestStatusColor($requestDetail->upperRoleRequestTracker->status) }}">{{ $requestDetail->upperRoleRequestTracker->status }}</b>
+                                        by the {{ currentUpperRoleName() }}. so no changes can be made regarding it at this
+                                        time.</p>
+                                    <hr>
+                                    <p class="mb-0">However, you may reach out to the {{ currentUpperRoleName() }} to discuss
+                                        the request changes.</p>
+                                </div>
                             @endif
                         @endcan
                     </div>
@@ -117,7 +123,7 @@
                                             <div class="col-6">{{ $requestTracker->created_at->format('d/m/Y H:i') }}
                                             </div>
                                             <div class="col-6 text-end"><label
-                                                    class="badge badge-light-danger">{{ $requestTracker->status }}</label>
+                                                    class="badge badge-light-{{ requestStatusColor($requestTracker->status) }}">{{ $requestTracker->status }}</label>
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +146,47 @@
                 </div>
             </div>
         </div>
-        <!-- [ Gallery-Grid ] start -->
+
+        @if (constRetirement(ucfirst(request()->page)))
+            <div class="col-sm-12">
+                <!-- [ Image-Grid ] start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fa fa-info-circle"></i> Retirement detail</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6>Description:</h6>
+                                <p>{{ $requestDetail->retirement->description }}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Date:</h6>
+                                <p>{{ $requestDetail->retirement->created_at->format('d/m/Y') }}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            @foreach ($requestDetail->retirement->attachments as $attachment)
+                                <div class="col-lg-4 col-sm-6">
+                                    <div class="thumbnail mb-4">
+                                        <div class="thumb">
+                                            <a href="{{ asset('storage/' . $attachment->path) }}" data-lightbox="1">
+                                                <img src="{{ asset('storage/' . $attachment->path) }}" alt=""
+                                                    class="img-fluid img-thumbnail"
+                                                    style="height: 250px; object-fit: cover; width: 100%;">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Image-Grid ] end -->
+            </div>
+        @endif
+        @if (is_null(request()->page))
+            <!-- [ Gallery-Grid ] start -->
         <div class="col-sm-12">
             <!-- [ Image-Grid ] start -->
             <div class="card">
@@ -168,6 +214,7 @@
             <!-- [ Image-Grid ] end -->
         </div>
         <!-- [ Gallery-Grid ] end -->
+        @endif
     </div>
 @stop
 

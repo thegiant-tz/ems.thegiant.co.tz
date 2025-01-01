@@ -1,5 +1,5 @@
   <!-- [ navigation menu ] start -->
-  <nav class="pcoded-navbar menupos-fixed menu-item-icon-style4 overflow-auto">
+  <nav class="pcoded-navbar menupos-fixed menu-item-icon-style2 overflow-auto">
       <div class="navbar-wrapper ">
           <div class="navbar-brand header-logo">
               <a href="" class="b-brand">
@@ -40,32 +40,46 @@
                       </li>
                   @endcan
 
-                  @can('view expense menus')
+                  @can('view expense menu')
                       <li class="nav-item pcoded-hasmenu">
                           <a href="#" class="nav-link"><span class="pcoded-micon"><i
-                                      class="fa fa-dashboard"></i></span><span class="pcoded-mtext">Expenses</span></a>
+                                      class="fa fa-briefcase fa-sm"></i></span><span
+                                  class="pcoded-mtext">Expenses</span></a>
                           <ul class="pcoded-submenu">
-                              @can('initiate request')
+                              @can('view initiate request submenu')
                                   <li class=""><a href="{{ route('account.request.initiate') }}" class="">Initiate
                                           request</a></li>
                               @endcan
-                              @can('view expense list')
-                                  <li class=""><a href="{{ route('account.request.list') }}" class="">My
-                                          requests</a></li>
+                              @can('view expense submenu')
+                                  <li class=""><a href="{{ route('account.request.list') }}" class="">Requests</a>
+                                  </li>
                               @endcan
-                              @can('view retirements')
+                              @can('view retirements submenu')
                                   <li class=""><a href="{{ route('account.request.retirements.index') }}"
                                           class="">Retirements</a></li>
                               @endcan
                           </ul>
                       </li>
                   @endcan
+                  @can('view calendar menu')
+                      <li class="nav-item">
+                          <a href="{{ route('account.calendar') }}" class="nav-link"><span class="pcoded-micon"><i
+                                      class="fa fa-calendar"></i></span><span class="pcoded-mtext">Calendar</span></a>
+                      </li>
+                  @endcan
+                  @can('view report menu')
+                      <li class="nav-item">
+                          <a href="{{ route('account.report.index') }}" class="nav-link"><span class="pcoded-micon"><i
+                                      class="fa fa-chart-bar"></i></span><span class="pcoded-mtext">Report</span></a>
+                      </li>
+                  @endcan
 
                   <li class="nav-item">
                       <form class="nav-link" method="post" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="btn btn-danger form-control btn-sm"><span class="pcoded-micon"><i class="mdi mdi-gauge-full"></i></span><span
-                            class="pcoded-mtext">Logout</span></button>
+                          @csrf
+                          <button class="btn btn-danger form-control btn-sm"><span class="pcoded-micon"><i
+                                      class="mdi mdi-gauge-full"></i></span><span
+                                  class="pcoded-mtext">Logout</span></button>
                       </form>
                   </li>
 

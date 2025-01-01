@@ -24,22 +24,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($requestDetails as $requestDetail)
-                        <tr>
-                            <td>{{ countLoop($requestDetails, $loop) }}</td>
-                            <td>{{ $requestDetail->codeId }}</td>
-                            <td>{{ \Str::limit($requestDetail->description, 50, '...') }}</td>
-                            <td>{{ $requestDetail->reason->type }}</td>
-                            {{-- <td><label class="badge badge-light-danger">Open</label> --}}
-                            {{-- </td> --}}
-                            <td>{{ $requestDetail->department->name }}</td>
-                            <td>{{ number_format($requestDetail->amount) }}</td>
-                            <td>{{ strtoupper($requestDetail->payment_type) }}</td>
-                            <td>{{ $requestDetail->created_at->format('d/m/Y') }}</td>
-                            <td><label class="badge badge-light-danger">{{ $requestDetail->latestStatus }}</label></td>
-                            <td class="text-center"><a href="{{ route('account.request.attachments', ['codeId' => aes_encrypt($requestDetail->codeId)]) }}"><i class="fa fa-eye"></i></a></td>
-                        </tr>
-                        @endforeach
+                        @forelse ($requestDetails as $requestDetail)
+                            <tr>
+                                <td>{{ countLoop($requestDetails, $loop) }}</td>
+                                <td>{{ $requestDetail->codeId }}</td>
+                                <td>{{ \Str::limit($requestDetail->description, 50, '...') }}</td>
+                                <td>{{ $requestDetail->reason->type }}</td>
+                                {{-- <td><label class="badge badge-light-danger">Open</label> --}}
+                                {{-- </td> --}}
+                                <td>{{ $requestDetail->department->name }}</td>
+                                <td>{{ number_format($requestDetail->amount) }}</td>
+                                <td>{{ strtoupper($requestDetail->payment_type) }}</td>
+                                <td>{{ $requestDetail->created_at->format('d/m/Y') }}</td>
+                                <td><label class="badge badge-light-{{ requestStatusColor($requestDetail->latestStatus) }}">{{ $requestDetail->latestStatus }}</label>
+                                </td>
+                                <td class="text-center"><a
+                                        href="{{ route('account.request.attachments', ['codeId' => aes_encrypt($requestDetail->codeId)]) }}"><i
+                                            class="fa fa-eye"></i></a></td>
+                            </tr>
+                        @empty
+                            <td colspan="11" class="text-center">No data found</td>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

@@ -20,12 +20,17 @@ class RequestController extends Controller
     function requestList(Request $request)
     {
         $data['pageTitle'] = 'Requests';
-        $data['requestDetails'] = RequestDetailService::getUserRequests($request);
+        $data['requestDetails'] = isset($request->status) ? userRequestByStatus($request->status) : RequestDetailService::getUserRequests($request);
         return view('backend.pages.v1.request-list', $data);
     }
 
     function storeRequest(Request $request)
     {
+        $request->validate([
+            'attachments' => 'array', // Ensure the input is an array
+            'attachments.*' => 'file|mimes:jpg,png,gif|max:2048', // Validate each file in the array
+        ]);
+        
         $requestDetail = RequestDetail::updateOrCreate([
             'reason_id' => $request->reason_id,
             'user_id' => authUserId(),

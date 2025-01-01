@@ -2,11 +2,13 @@
 
 namespace App\Services;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class Paginator
 {
-    static function fromArray(array $arrayResponse)
+    static function fromArray($arrayResponse, $perPage = 15)
     {
         
         if (!is_null($arrayResponse)) {
@@ -28,6 +30,15 @@ class Paginator
             $perPage = $jsonResponse->meta->per_page;
             $totalItems = $jsonResponse->meta->total;
             return new LengthAwarePaginator($items, $totalItems, $perPage, $currentPage, ['path' => $url]);
+        }
+        return [];
+    }
+
+    static function fromCollection(Collection|SupportCollection $collections, $perPage = 15)
+    {
+        
+        if (!is_null($collections)) {
+            return new LengthAwarePaginator($collections, count($collections), $perPage, options: ['path' => request()->url()]);
         }
         return [];
     }

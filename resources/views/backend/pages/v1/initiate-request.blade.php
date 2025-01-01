@@ -50,7 +50,11 @@
                     <div class="col-md-4">
                         <div class="mb-3">
                             <label for="exampleDataList" class="form-label">Attachments (< 2MB=> Optional)</label>
-                            <input type="file" name="attachments[]" class="form-control" multiple>
+                            <input type="file" name="attachments[]" class="form-control"
+                                accept="image/png, image/gif, image/jpeg" multiple>
+                            @error('attachments[]')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="col-md-12">
