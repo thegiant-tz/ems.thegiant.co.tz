@@ -79,15 +79,15 @@
                                     <option value="">-- Select payment type--</option>
                                 @endif
 
-                                @foreach (['cash' => 'CASH', 'bank' => 'BANK'] as $key => $paymentType)
+                                @foreach (['cash' => 'CASH', 'bank' => 'BANK'] as $key => $paymentTypeValue)
                                     @if (isset($paymentType) && $paymentType == $key)
-                                        <option value="{{ $key }}">{{ $paymentType }}</option>
+                                        <option value="{{ $key }}">{{ $paymentTypeValue }}</option>
                                     @endif
                                 @endforeach
 
-                                @foreach (['cash' => 'CASH', 'bank' => 'BANK'] as $key => $paymentType)
+                                @foreach (['cash' => 'CASH', 'bank' => 'BANK'] as $key => $paymentTypeValue)
                                     @if (!isset($paymentType) || $paymentType != $key)
-                                        <option value="{{ $key }}">{{ $paymentType }}</option>
+                                        <option value="{{ $key }}">{{ $paymentTypeValue }}</option>
                                     @else
                                         <option value="">-- None --</option>
                                     @endif
