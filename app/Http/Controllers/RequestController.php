@@ -38,6 +38,7 @@ class RequestController extends Controller
             'description' => $request->description,
             'amount' => $request->amount,
             'payment_type' => $request->payment_type,
+            'currency' => $request->currency,
             'codeId' => RequestDetailService::generateCodeId('EMS')
         ]);
 
