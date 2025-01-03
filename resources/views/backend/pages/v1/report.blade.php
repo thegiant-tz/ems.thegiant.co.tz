@@ -1,6 +1,8 @@
 @extends('layouts.v1.backend')
 @section('title', 'Report')
 @push('css_after')
+    <!-- data tables css -->
+    <link rel="stylesheet" href="{{ asset('assets/plugins/data-tables/datatables.bootstrap4.min.css') }}">
 @endpush
 @section('content')
     <div class="card">
@@ -20,8 +22,15 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label for="exampleDataList" class="form-label">Date</label>
-                            <input type="date" class="form-control" name="requestDate" value="{{ $requestDate ?? '' }}">
+                            <label for="exampleDataList" class="form-label">Start Date</label>
+                            <input type="date" class="form-control" name="startDate" value="{{ $startDate ?? '' }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label for="exampleDataList" class="form-label">End Date</label>
+                            <input type="date" class="form-control" name="endDate" value="{{ $endDate ?? '' }}">
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -118,3 +127,35 @@
 
 
 @stop
+
+@push('js_after')
+    <!-- datatable Js -->
+    <script src="{{ asset('assets/plugins/data-tables/js/datatables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/data-tables/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pages/data-export-custom.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#export-buttons').DataTable({
+                dom: "Bfrtip",
+                "pageLength": 57, // Set the default page size to 10,
+                buttons: [
+                    'excel',
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        className: 'btn btn-sm btn-primary',
+                        customize: function(win) {
+                            // Use jQuery to hide columns with the 'no-print' class during print
+                            $(win.document.body).find(
+                                    'table thead th.noPrint, table tbody td.noPrint')
+                                .css('display', 'none');
+                        }
+                    }
+                ],
+                paging: false,
+                info: false,
+                searching: false,
+            });
+        })
+    </script>
+@endpush

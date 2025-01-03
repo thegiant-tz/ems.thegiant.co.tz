@@ -23,6 +23,7 @@ class PermissionSeeder extends Seeder
             'view report menu',
             'view calendar menu',
             'fill retirements form',
+            'view initiator column'
         ];
 
         foreach ($permissions as $key => $permission) {
