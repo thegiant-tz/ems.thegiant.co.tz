@@ -33,6 +33,16 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
+                            <label for="exampleDataList" class="form-label">Currency</label>
+                            <select name="currency" id="" class="select2 form-control" required>
+                                <option value="">-- Select currency--</option>
+                                <option value="TZS">TZS</option>
+                                <option value="USD">USD</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mb-3">
                             <label for="exampleDataList" class="form-label">Amount</label>
                             <input type="number" class="form-control" name="amount" placeholder="Enter amount" required>
                         </div>

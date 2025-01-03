@@ -40,7 +40,7 @@
                                 {{-- <td><label class="badge badge-light-danger">Open</label> --}}
                                 {{-- </td> --}}
                                 <td>{{ $requestDetail->department->name }}</td>
-                                <td>{{ number_format($requestDetail->amount) }}</td>
+                                <td>{{ $requestDetail->currency.' '.number_format($requestDetail->amount) }}</td>
                                 <td>{{ strtoupper($requestDetail->payment_type) }}</td>
                                 <td>{{ $requestDetail->created_at->format('d/m/Y') }}</td>
                                 <td><label

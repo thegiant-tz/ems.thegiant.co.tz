@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-6 col-md-4">
                                 <h6>amount:</h6>
-                                <div>{{ number_format($requestDetail->amount) }}</div>
+                                <div>{{ $requestDetail->currency.' '.number_format($requestDetail->amount) }}</div>
                             </div>
                         </div>
                         <div class="row items-push pt-3">
