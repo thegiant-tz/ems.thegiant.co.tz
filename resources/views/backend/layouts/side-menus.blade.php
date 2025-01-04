@@ -47,7 +47,7 @@
                                   class="pcoded-mtext">Expenses</span></a>
                           <ul class="pcoded-submenu">
                               @can('view initiate request submenu')
-                                  <li class=""><a href="{{ route('account.request.initiate') }}" class="">Initiate
+                                  <li class=""><a href="{{ route('account.request.initiate' , ['role' => authUser()->can('view initiate request submenu') ? 'initiator' : null ]) }}" class="">Initiate
                                           request</a></li>
                               @endcan
                               @can('view expense submenu')

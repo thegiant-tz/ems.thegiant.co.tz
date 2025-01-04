@@ -18,8 +18,15 @@ if (!function_exists('authUserId')) {
     }
 }
 
-if (!function_exists('isInitiator')) {
-    function isInitiator()
+if (!function_exists('isInitiatorPage')) {
+    function isInitiatorPage()
+    {
+        return  isNormalUser() || (isset(request()->role) && request()->role == 'initiator');
+    }
+}
+
+if (!function_exists('isNormalUser')) {
+    function isNormalUser()
     {
         return currentRoleName() == 'Normal';
     }

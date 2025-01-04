@@ -22,8 +22,8 @@ class RequestDetailService
         ->when(isset($request->departmentId), fn($query) => $query->whereDepartmentId( $request->departmentId))
         ->when(isset($request->reasonId), fn($query) => $query->whereReasonId( $request->reasonId))
         ->when(isset($request->paymentType), fn($query) => $query->wherePaymentType( $request->paymentType))
-        ->when(isInitiator(), fn($query) => $query->whereUserId(authUserId()))
-            ->when(!isInitiator(), fn($query) => $query->whereHas('requestTrackers.user.role', fn($role) => $role->whereName(currentLowerRoleName())))
+        ->when(isInitiatorPage(), fn($query) => $query->whereUserId(authUserId()))
+            ->when(!isInitiatorPage(), fn($query) => $query->whereHas('requestTrackers.user.role', fn($role) => $role->whereName(currentLowerRoleName())))
             ->orderBy('id', 'desc');
         return $isPaginate ? $query->paginate($perPage) : $query->get();
     }

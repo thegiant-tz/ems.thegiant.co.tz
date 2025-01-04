@@ -84,5 +84,5 @@
             </form>
         </div>
     </div>
-    @include('backend.pages.v1.includes.request-list-table')
+    @include('backend.pages.v1.includes.request-list-table', ['isInitiatorPage' => true])
 @stop
