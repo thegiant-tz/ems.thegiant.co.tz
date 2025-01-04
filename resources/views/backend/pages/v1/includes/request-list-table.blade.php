@@ -19,6 +19,7 @@
                             <th>Descriptions</th>
                             <th>Reason</th>
                             <th>Department</th>
+                            <th>currency</th>
                             <th>Amount</th>
                             <th>Payment Type</th>
                             <th>Date</th>
@@ -40,7 +41,8 @@
                                 {{-- <td><label class="badge badge-light-danger">Open</label> --}}
                                 {{-- </td> --}}
                                 <td>{{ $requestDetail->department->name }}</td>
-                                <td>{{ $requestDetail->currency.' '.number_format($requestDetail->amount) }}</td>
+                                <td>{{ $requestDetail->currency }}</td>
+                                <td>{{ number_format($requestDetail->amount) }}</td>
                                 <td>{{ strtoupper($requestDetail->payment_type) }}</td>
                                 <td>{{ $requestDetail->created_at->format('d/m/Y') }}</td>
                                 <td><label

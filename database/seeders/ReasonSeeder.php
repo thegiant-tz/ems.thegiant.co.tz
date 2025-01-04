@@ -13,7 +13,7 @@ class ReasonSeeder extends Seeder
      */
     public function run(): void
     {
-        $reasons = ['Travel Expenses Approval', 'Purchase Approval', 'Reimbursement Approval'];
+        $reasons = ['Travel Expenses Approval', 'Purchase Approval', 'Reimbursement Approval', 'Other Approvals'];
         foreach ($reasons as $reason) {
             Reason::updateOrCreate(['type' => $reason]);
         }
