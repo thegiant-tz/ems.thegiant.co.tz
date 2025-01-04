@@ -35,7 +35,7 @@
 
                   @can('view dashboard menu')
                       <li class="nav-item">
-                          <a href="#" class="nav-link"><span class="pcoded-micon"><i
+                          <a href="{{ route('account.request.list') }}" class="nav-link"><span class="pcoded-micon"><i
                                       class="mdi mdi-gauge-full"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                       </li>
                   @endcan
