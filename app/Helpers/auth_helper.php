@@ -28,21 +28,21 @@ if (!function_exists('isInitiatorPage')) {
 if (!function_exists('isNormalUser')) {
     function isNormalUser()
     {
-        return currentRoleName() == 'Normal';
+        return currentRoleName() == 'Initiator';
     }
 }
 
 if (!function_exists('isChiefAccountant')) {
     function isChiefAccountant()
     {
-        return currentRoleName() == 'Chief Accountant';
+        return currentRoleName() == 'Accountant';
     }
 }
 
 if (!function_exists('isCEO')) {
     function isCEO()
     {
-        return currentRoleName() == 'CEO';
+        return currentRoleName() == 'Director';
     }
 }
 
