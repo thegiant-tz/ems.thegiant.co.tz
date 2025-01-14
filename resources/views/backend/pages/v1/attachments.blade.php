@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-6 col-md-4">
                                 <h6>amount:</h6>
-                                <div>{{ $requestDetail->currency.' '.number_format($requestDetail->amount) }}</div>
+                                <div>{{ $requestDetail->currency . ' ' . number_format($requestDetail->amount) }}</div>
                             </div>
                         </div>
                         <div class="row items-push pt-3">
@@ -167,17 +167,31 @@
                         </div>
                         <div class="row">
                             @foreach ($requestDetail->retirement->attachments as $attachment)
-                                <div class="col-lg-4 col-sm-6">
-                                    <div class="thumbnail mb-4">
-                                        <div class="thumb">
-                                            <a href="{{ asset('storage/' . $attachment->path) }}" data-lightbox="1">
-                                                <img src="{{ asset('storage/' . $attachment->path) }}" alt=""
-                                                    class="img-fluid img-thumbnail"
-                                                    style="height: 250px; object-fit: cover; width: 100%;">
-                                            </a>
+                                @if (isFileTypeImage($attachment->path))
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="thumbnail mb-4">
+                                            <div class="thumb">
+                                                <a href="{{ asset('storage/' . $attachment->path) }}" data-lightbox="1">
+                                                    <img src="{{ asset('storage/' . $attachment->path) }}" alt=""
+                                                        class="img-fluid img-thumbnail"
+                                                        style="height: 250px; object-fit: cover; width: 100%;">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            @foreach ($requestDetail->retirement->attachments as $attachment)
+                                @if (!isFileTypeImage($attachment->path))
+                                    <div class="col-12">
+                                        <img src="{{ isFileTypePdf($attachment->path) ? asset('images/icons/pdf.png') : asset('images/icons/msword.webp') }}"
+                                            height="30px" alt="" srcset=""> <a
+                                            href="{{ asset('storage/' . $attachment->path) }}"
+                                            download="{{ asset('storage/' . $attachment->path) }}">{{ basename($attachment->path) }}</a>
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     </div>
@@ -187,33 +201,47 @@
         @endif
         @if (is_null(request()->page))
             <!-- [ Gallery-Grid ] start -->
-        <div class="col-sm-12">
-            <!-- [ Image-Grid ] start -->
-            <div class="card">
-                <div class="card-header">
-                    <h5>Attachments({{ $requestDetail->attachments->count() }})</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        @foreach ($requestDetail->attachments as $attachment)
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="thumbnail mb-4">
-                                    <div class="thumb">
-                                        <a href="{{ asset('storage/' . $attachment->path) }}" data-lightbox="1">
-                                            <img src="{{ asset('storage/' . $attachment->path) }}" alt=""
-                                                class="img-fluid img-thumbnail"
-                                                style="height: 250px; object-fit: cover; width: 100%;">
-                                        </a>
+            <div class="col-sm-12">
+                <!-- [ Image-Grid ] start -->
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Attachments({{ $requestDetail->attachments->count() }})</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ($attachments = $requestDetail->attachments as $attachment)
+                                @if (isFileTypeImage($attachment->path))
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="thumbnail mb-4">
+                                            <div class="thumb">
+                                                <a href="{{ asset('storage/' . $attachment->path) }}" data-lightbox="1">
+                                                    <img src="{{ asset('storage/' . $attachment->path) }}" alt=""
+                                                        class="img-fluid img-thumbnail"
+                                                        style="height: 250px; object-fit: cover; width: 100%;">
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="row">
+                            @foreach ($attachments as $attachment)
+                                @if (!isFileTypeImage($attachment->path))
+                                    <div class="col-12">
+                                        <img src="{{ isFileTypePdf($attachment->path) ? asset('images/icons/pdf.png') : asset('images/icons/msword.webp') }}"
+                                            height="30px" alt="" srcset=""> <a
+                                            href="{{ asset('storage/' . $attachment->path) }}"
+                                            download="{{ asset('storage/' . $attachment->path) }}">{{ basename($attachment->path) }}</a>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
                 </div>
+                <!-- [ Image-Grid ] end -->
             </div>
-            <!-- [ Image-Grid ] end -->
-        </div>
-        <!-- [ Gallery-Grid ] end -->
+            <!-- [ Gallery-Grid ] end -->
         @endif
     </div>
 @stop

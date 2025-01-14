@@ -26,11 +26,6 @@ class RequestController extends Controller
 
     function storeRequest(Request $request)
     {
-        $request->validate([
-            'attachments' => 'array', // Ensure the input is an array
-            'attachments.*' => 'file|mimes:jpg,png,gif|max:2048', // Validate each file in the array
-        ]);
-        
         $requestDetail = RequestDetail::updateOrCreate([
             'reason_id' => $request->reason_id,
             'user_id' => authUserId(),
@@ -44,7 +39,8 @@ class RequestController extends Controller
 
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                $path = Storage::disk('public')->put(env('ATTACHMENT_PATH') . 'requests/' . authUser()->id . '/', $file);
+                $originalName = $file->getClientOriginalName();
+                $path = Storage::disk('public')->putFileAs(env('ATTACHMENT_PATH') . 'requests/' . authUser()->id . '/', $file, $originalName);
                 $requestDetail->attachments()->updateOrCreate(['path' => $path]);
             }
         }
@@ -62,7 +58,8 @@ class RequestController extends Controller
         return view('backend.pages.v1.attachments', $data);
     }
 
-    function requestAction(Request $request) {
+    function requestAction(Request $request)
+    {
         $updated = requestDetailByCodeId($request->codeId)->requestTrackers()->create([
             'remarks' => $request->remarks,
             'user_id' => authUserId(),

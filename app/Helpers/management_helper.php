@@ -66,4 +66,26 @@ if (!function_exists('currentUpperRole')) {
     }
 }
 
+if (!function_exists('isFileTypeImage')) {
+    function isFileTypeImage($filename)
+    {
+        $data = explode('.', $filename);
+        return in_array(end($data), ['jpg', 'png', 'gif', 'jpeg']);
+    }
+}
 
+if (!function_exists('isFileTypePdf')) {
+    function isFileTypePdf($filename)
+    {
+        $data = explode('.', $filename);
+        return in_array(end($data), ['pdf']);
+    }
+}
+
+if (!function_exists('isFileTypeMsWord')) {
+    function isFileTypeMsWord($filename)
+    {
+        $data = explode('.', $filename);
+        return in_array(end($data), ['pdf']);
+    }
+}

@@ -19,10 +19,6 @@ class RetirementController extends Controller
     }
 
     function store(Request $request) {
-        $request->validate([
-            'attachments' => 'array', // Ensure the input is an array
-            'attachments.*' => 'file|mimes:jpg,png,gif|max:2048', // Validate each file in the array
-        ]);
         $retirement = Retirement::updateOrCreate([
             'request_detail_id' => $request->request_detail_id,
             'user_id' => Auth::user()->id,
@@ -31,7 +27,8 @@ class RetirementController extends Controller
 
         if ($request->hasFile('attachments')) {
             foreach ($request->file('attachments') as $file) {
-                $path = Storage::disk('public')->put(env('ATTACHMENT_PATH') .'retirements/'. authUser()->id . '/', $file);
+                $originalName = $file->getClientOriginalName();
+                $path = Storage::disk('public')->putFileAs(env('ATTACHMENT_PATH') .'retirements/'. authUser()->id . '/', $file, $originalName);
                 $retirement->attachments()->updateOrCreate(['path' => $path]);
             }
         }

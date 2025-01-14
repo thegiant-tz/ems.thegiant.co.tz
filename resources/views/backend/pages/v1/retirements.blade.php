@@ -24,7 +24,7 @@
                             <div class="mb-3">
                                 <label for="exampleDataList" class="form-label">Attachments (< 2MB)</label>
                                         <input type="file" name="attachments[]" class="form-control"
-                                            accept="image/png, image/gif, image/jpeg" multiple>
+                                            accept="image/png, image/gif, image/jpeg, .pdf, .doc, .docx, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple>
                                         @error('attachments[]')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
