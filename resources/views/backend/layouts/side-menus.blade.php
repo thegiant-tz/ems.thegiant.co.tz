@@ -5,7 +5,7 @@
               <a href="" class="b-brand">
 
                   <img src="{{ asset('images/logo.png') }}" height="50px" alt="logo" class="logo images">
-                  <img src="images/logo.png" alt="logo" class="logo-thumb images">
+                  <img src="{{ asset('images/logo.png') }}" alt="logo" class="logo-thumb images">
               </a>
               <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
           </div>
