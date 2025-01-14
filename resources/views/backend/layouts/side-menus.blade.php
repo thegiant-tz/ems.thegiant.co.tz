@@ -4,8 +4,8 @@
           <div class="navbar-brand header-logo">
               <a href="" class="b-brand">
 
-                  <img src="{{ asset('images/bm1.png') }}" height="50px" alt="logo" class="logo images">
-                  <img src="assets/images/logo-icon.svg" alt="logo" class="logo-thumb images">
+                  <img src="{{ asset('images/logo.png') }}" height="50px" alt="logo" class="logo images">
+                  <img src="images/logo.png" alt="logo" class="logo-thumb images">
               </a>
               <a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
           </div>
