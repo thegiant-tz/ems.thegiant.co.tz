@@ -116,7 +116,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-notification">
                         <div class="pro-head">
-                            <img src="{{ asset('images/bm1.png') }}" class="img-radius" alt="User-Profile-Image">
+                            <img src="{{ asset('images/logo.png') }}" class="img-radius" alt="User-Profile-Image">
                             <span>
                                 <span class="text-muted">{{ authUser()->name }}</span>
                                 <span class="h6">{{ authUser()->email }}</span>

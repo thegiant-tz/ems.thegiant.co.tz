@@ -12,7 +12,7 @@
                         <div class="card-body">
 
                             <div class="text-center">
-                                <img src="{{ asset('images/bm1.png') }}" height="100px" alt="" srcset="">
+                                <img src="{{ asset('images/logo.png') }}" height="100px" alt="" srcset="">
                             </div>
                             <h3 class="mb-3 text-center">EXPENSE MANAGEMENT SYSTEM</h3>
                             {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 d-none d-md-block">
-                        <img src="{{ asset('images/bm1.png') }}" alt=""
+                        <img src="{{ asset('images/logo.png') }}" alt=""
                             class="img-fluid bd-placeholder-img bd-placeholder-img-lg d-block w-100">
                     </div>
                 </div>
