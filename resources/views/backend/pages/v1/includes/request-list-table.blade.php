@@ -23,7 +23,7 @@
                             <th>Amount</th>
                             <th>Payment Type</th>
                             <th>Date</th>
-                            <th>Status</th>
+                            {{-- <th>Status</th> --}}
                             <th class="noPrint">Action</th>
                         </tr>
                     </thead>
@@ -45,9 +45,9 @@
                                 <td>{{ number_format($requestDetail->amount) }}</td>
                                 <td>{{ strtoupper($requestDetail->payment_type) }}</td>
                                 <td>{{ $requestDetail->created_at->format('d/m/Y') }}</td>
-                                <td><label
+                                {{-- <td><label
                                         class="badge badge-light-{{ requestStatusColor($requestDetail->latestStatus) }}">{{ $requestDetail->latestStatus }}</label>
-                                </td>
+                                </td> --}}
                                 <td class="text-center noPrint"><a
                                         href="{{ route('account.request.attachments', ['codeId' => aes_encrypt($requestDetail->codeId)]) }}"><i
                                             class="fa fa-eye"></i></a></td>
@@ -57,6 +57,11 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div>
+                @isset($requestDetails)
+                    {!! $requestDetails->links() !!}
+                @endisset
             </div>
         </div>
     </div>

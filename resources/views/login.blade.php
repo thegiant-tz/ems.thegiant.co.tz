@@ -48,9 +48,8 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6 d-none d-md-block">
-                        <img src="{{ asset('images/logo.png') }}" alt=""
-                            class="img-fluid bd-placeholder-img bd-placeholder-img-lg d-block w-100">
+                    <div class="col-md-6 d-none d-md-block" style="text-align: center">
+                        <img src="{{ asset('images/logo.png') }}" style="height: 250px" alt="" class="img-fluid">
                     </div>
                 </div>
             </div>

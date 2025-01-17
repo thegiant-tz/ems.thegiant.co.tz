@@ -47,6 +47,7 @@ class RequestController extends Controller
         $requestDetail->requestTrackers()->create([
             'remarks' => $request->description,
             'user_id' => authUserId(),
+            'status' => 'Approved'
         ]);
         return redirect()->route('account.request.initiate');
     }

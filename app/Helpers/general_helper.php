@@ -5,6 +5,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\RequestDetail;
 use App\Models\RequestTracker;
+use App\Models\User;
 
 if (!function_exists('str_nbsp')) {
     function str_nbsp($string)
@@ -19,21 +20,23 @@ if (!function_exists('countLoop')) {
         $sn = ((($currentPage = $paginated->currentPage()) > 1) ? (($paginated->perPage() * (--$currentPage)) + $loop->iteration) : $loop->iteration);
 
         if ($sn < 10) {
-            $sn = '0'.$sn; 
+            $sn = '0' . $sn;
         }
         return $sn;
     }
 }
 
 if (!function_exists('customPaginateUrl')) {
-    function customPaginateUrl($endpoint, $page = 1) {
+    function customPaginateUrl($endpoint, $page = 1)
+    {
         return apiRoute($endpoint) . "?page=" . $page;
     }
 }
 
 if (!function_exists('apiRoute')) {
-    function apiRoute($endpoint) {
-        return env('BASE_URL'). $endpoint;
+    function apiRoute($endpoint)
+    {
+        return env('BASE_URL') . $endpoint;
     }
 }
 
@@ -61,7 +64,7 @@ if (!function_exists('departments')) {
 }
 
 if (!function_exists('requestDetailByCodeId')) {
-    function requestDetailByCodeId($codeId) : RequestDetail
+    function requestDetailByCodeId($codeId): RequestDetail
     {
         return RequestDetail::where('codeId', $codeId)->first();
     }
@@ -85,5 +88,15 @@ if (!function_exists('isRequest')) {
     function isRequest(RequestDetail $requestDetail)
     {
         return $requestDetail->latest_status == 'Approved';
+    }
+}
+
+if (!function_exists('usersByRole')) {
+    function usersByRole($roleName = null)
+    {
+        if (!is_null($roleName)) {
+            return User::whereHas('role', fn($role) => $role->whereName(ucwords($roleName)))->get();
+        }
+        return User::whereIn('id', RequestDetail::groupBy('user_id')->get('user_id'))->get();
     }
 }

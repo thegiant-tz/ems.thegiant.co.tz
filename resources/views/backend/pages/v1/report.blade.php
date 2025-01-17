@@ -106,11 +106,32 @@
                     </div>
                     <div class="col-md-4">
                         <div class="mb-3">
+                            <label for="exampleDataList" class="form-label">Initiator</label>
+                            <select name="initiator" id="" class="select2 form-control">
+                                @if (!isset($initiator))
+                                    <option value="">-- Select Initiator--</option>
+                                @endif
+
+                                @foreach (($initiators = usersByRole()) as  $user)
+                                    @if (isset($initiator) && $initiator == $user->id)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endif
+                                @endforeach
+
+                                @foreach ($initiators  as  $user)
+                                    @if (!isset($initiator) || $initiator != $user->id)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @else
+                                        <option value="">-- None --</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col-md-2 offset-md-0">
+                    <div class="col-md-4 offset-md-0">
                         <div class="mb-3">
+                            <label for="exampleDataList" class="form-label text-white">.</label>
                             <button class="form-control btn btn-sm btn-primary">Search</button>
                         </div>
                     </div>
