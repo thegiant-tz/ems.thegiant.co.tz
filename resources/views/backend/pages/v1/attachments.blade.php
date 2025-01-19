@@ -41,15 +41,14 @@
                                 <div>{{ strtoupper($requestDetail->payment_type) }}</div>
                             </div>
                         </div>
-                        <div class="row items-push pt-3">
-
+                        {{-- <div class="row items-push pt-3">
                             <div class="col-md-6">
                                 <h6>Overall Status:</h6>
                                 <div><label
                                         class="badge badge-light-{{ requestStatusColor($requestDetail->latestStatus) }}">{{ $requestDetail->latestStatus }}</label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row items-push pt-3">
                             <div class="col-12">
