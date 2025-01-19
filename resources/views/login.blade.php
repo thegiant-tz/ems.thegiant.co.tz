@@ -14,7 +14,7 @@
                             <div class="text-center">
                                 <img src="{{ asset('images/logo.png') }}" height="100px" alt="" srcset="">
                             </div>
-                            <h3 class="mb-3 text-center">EXPENSE MANAGEMENT SYSTEM</h3>
+                            <h3 class="mb-3 text-center">FINMASTER</h3>
                             {{-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has
                                 been the industrys.</p> --}}
                             <form method="POST" action="{{ route('login') }}" class="toggle-block">
@@ -24,7 +24,7 @@
                                 </ol>
                                 <div class="form-group mb-2">
                                     <label class="form-label">Enter Username</label>
-                                    <input type="text" class="form-control" name="email" placeholder="eg. thegiant">
+                                    <input type="text" class="form-control" name="email">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label class="form-label">Enter Password</label>
